@@ -10,16 +10,18 @@ const Home: NextPage = () => {
           <p className="text-2xl">сучасний спортзал у Львові</p>
         </div>
       </section>
-      <section id="about" className="px-10 py-20 min-h-[700px]">
-        <h2 className="text-h1">про <span className="border-b-8 border-teal-500">sportclub</span></h2>
-        <div className="flex gap-20 justify-between">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt recusandae suscipit temporibus illum modi debitis natus ex porro exercitationem hic! Aut deleniti vero ipsum dolorum harum minus sed magnam laboriosam delectus. Ratione odio tempore fuga pariatur dolorsibus quos perferendis amet harum nostrum asperiores error deleniti voluptate eos illum nihil aspernatur animi, ipsum sapiente explicabo beatae laudantium iure. Quis aliquid ipsam, unde nisi obcaecati nihil iure expedita quo animi blanditiis, laborum laudantium neque quibusdam beatae perspiciatis fugiat officiis eius dolor explicabo aliquam, eum dolorem. Unde dolor enim id, obcaecati rem ipsum fuga inventore tenetur? Laudantium quidem dolorem maxime harum, ab autem!</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt recusandae suscipit temporibus illum modi debitis natus ex porro exercitationem hic! Aut deleniti vero ipsum dolorum harum minus sed magnam laboriosam delectus. Ratione odio tempore fuga pariatur dolorsibus quos perferendis amet harum nostrum asperiores error deleniti voluptate eos illum nihil aspernatur animi, ipsum sapiente explicabo beatae laudantium iure. Quis aliquid ipsam, unde nisi obcaecati nihil iure expedita quo animi blanditiis, laborum laudantium neque quibusdam beatae perspiciatis fugiat officiis eius dolor explicabo aliquam, eum dolorem. Unde dolor enim id, obcaecati rem ipsum fuga inventore tenetur? Laudantium quidem dolorem maxime harum, ab autem!</p>
+      <section id="about" className="px-10 py-20 min-h-[700px] flex justify-center">
+        <div className="max-w-[90%] md:max-w-[1200px]">
+          <h2 className="text-h1">про <span className="border-b-8 border-teal-500">sportclub</span></h2>
+          <div className="flex flex-col xl:flex-row gap-10 mt-10 justify-center items-center">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt recusandae suscipit temporibus illum modi debitis natus ex porro exercitationem hic! Aut deleniti vero ipsum dolorum harum minus sed magnam laboriosam delectus. Ratione odio tempore fuga pariatur dolorsibus quos perferendis amet harum nostrum asperiores error deleniti voluptate eos illum nihil aspernatur animi, ipsum sapiente explicabo beatae laudantium iure. Quis aliquid ipsam, unde nisi obcaecati nihil iure expedita quo animi blanditiis, laborum laudantium neque quibusdam beatae perspiciatis fugiat officiis eius dolor explicabo aliquam, eum dolorem. Unde dolor enim id, obcaecati rem ipsum fuga inventore tenetur? Laudantium quidem dolorem maxime harum, ab autem!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt recusandae suscipit temporibus illum modi debitis natus ex porro exercitationem hic! Aut deleniti vero ipsum dolorum harum minus sed magnam laboriosam delectus. Ratione odio tempore fuga pariatur dolorsibus quos perferendis amet harum nostrum asperiores error deleniti voluptate eos illum nihil aspernatur animi, ipsum sapiente explicabo beatae laudantium iure. Quis aliquid ipsam, unde nisi obcaecati nihil iure expedita quo animi blanditiis, laborum laudantium neque quibusdam beatae perspiciatis fugiat officiis eius dolor explicabo aliquam, eum dolorem. Unde dolor enim id, obcaecati rem ipsum fuga inventore tenetur? Laudantium quidem dolorem maxime harum, ab autem!</p>
+          </div>
         </div>
       </section>
-      <section id="trainers" className="p-10 min-h-[700px] bg-borderDark">
+      <section id="trainers" className="px-10 py-20 min-h-[700px] bg-borderDark">
         <h2 className="text-h1 text-center">тренери</h2>
-        <div className="flex justify-between gap-10 mt-5">
+        <div className="flex flex-col xl:flex-row items-center justify-center gap-10 mt-10">
           <div className="h-[500px] w-[400px] p-5 bg-black rounded-[20px] flex flex-col justify-end">
             <div className="flex flex-col gap-5">
               <p className="text-[30px]">Петро Петрович</p>
