@@ -1,8 +1,9 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "@/ui/Button";
 import Link from "next/link";
+import useWindowDimensions from "@/hooks/useWindowDimensions";
 
-const AuthShowcase: React.FC = () => {
+const AuthMenu: React.FC = () => {
   const { data: sessionData } = useSession();
   console.log(sessionData);
   
@@ -22,17 +23,20 @@ const AuthShowcase: React.FC = () => {
 
 
 export const Header = () => {
+  const { width } = useWindowDimensions()
+
+
   return (
     <header className="fixed top-0 w-full h-[80px] bg-black flex justify-between items-center px-10 border-b border-b-borderDark">
       <div className="text-4xl font-medium">sportclub</div>
-      <div className="flex items-center gap-5">
+      {width > 1000 ? ( <div className="flex items-center gap-5">
         <nav className="flex gap-5">
           <Link className="hover:text-teal-500 transition-colors duration-200" href={'/#intro'} scroll={false}>головна</Link>
           <Link className="hover:text-teal-500 transition-colors duration-200" href={'/#about'} scroll={false}>про нас</Link>
           <Link className="hover:text-teal-500 transition-colors duration-200" href={'/#trainers'} scroll={false}>тренери</Link>
         </nav>
-        <AuthShowcase />
-      </div>
+        <AuthMenu />
+      </div>) : (<div>Menu</div>)}
     </header>
   )
 }
