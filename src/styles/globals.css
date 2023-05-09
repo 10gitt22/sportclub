@@ -3,34 +3,48 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Mariupol';
-  src: url('../../public/fonts/Mariupol-Regular.ttf');
+  font-family: 'Fixel';
+  src: url('../../public/fonts/FixelText-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Fixel';
+  src: url('../../public/fonts/FixelText-Regular.ttf');
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Mariupol';
-  src: url('../../public/fonts/Mariupol-Medium.ttf');
+  font-family: 'Fixel';
+  src: url('../../public/fonts/FixelText-Medium.ttf');
   font-weight: 500;
 }
 
 @font-face {
-  font-family: 'Mariupol';
-  src: url('../../public/fonts/Mariupol-Bold.ttf');
-  font-weight: 700;
+  font-family: 'Fixel';
+  src: url('../../public/fonts/FixelText-SemiBold.ttf');
+  font-weight: 600;
 }
+
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Mariupol';
-  background-color: #222;
-  color: #fff;
+  font-family: 'Fixel';
+  background-color: #fff;
+  font-weight: 400;
+  color: #222;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 10px;
+  }
 }
 
 h1,h2,h3,h4,h5,h6 {
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1;
 }

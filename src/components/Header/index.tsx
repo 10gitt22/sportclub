@@ -1,7 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "@/ui/Button";
 import Link from "next/link";
-import useWindowDimensions from "@/hooks/useWindowDimensions";
 
 const AuthMenu: React.FC = () => {
   const { data: sessionData } = useSession();
@@ -9,13 +8,13 @@ const AuthMenu: React.FC = () => {
   
   return (
     <div className="flex items-center justify-center gap-5">
-      <p className="text-center text-p text-white">
+      <p className="text-center text-l font-bold text-black">
         {sessionData && <span>{sessionData.user?.email}</span>}
       </p>
       <Button
         onClick={sessionData ? () => void signOut() : () => void signIn()}
       >
-        {sessionData ? "Вийти" : "Увійти"}
+        {sessionData ? "вийти" : "увійти"}
       </Button>
     </div>
   );
@@ -23,20 +22,21 @@ const AuthMenu: React.FC = () => {
 
 
 export const Header = () => {
-  const { width } = useWindowDimensions()
-
 
   return (
-    <header className="fixed top-0 w-full h-[80px] bg-black flex justify-between items-center px-10 border-b border-b-borderDark">
-      <div className="text-4xl font-medium">sportclub</div>
-      {width > 1000 ? ( <div className="flex items-center gap-5">
+    <header className="fixed top-0 w-full h-[80px] bg-white flex justify-between items-center px-5 lg:px-10">
+      <div className="text-4xl font-bold">
+        sportclub        
+      </div>
+      <div className="flex items-center gap-5 text-l font-normal">
         <nav className="flex gap-5">
           <Link className="hover:text-teal-500 transition-colors duration-200" href={'/#intro'} scroll={false}>головна</Link>
           <Link className="hover:text-teal-500 transition-colors duration-200" href={'/#about'} scroll={false}>про нас</Link>
           <Link className="hover:text-teal-500 transition-colors duration-200" href={'/#trainers'} scroll={false}>тренери</Link>
+          <Link className="hover:text-teal-500 transition-colors duration-200" href={'/#trainers'} scroll={false}>абонементи</Link>
         </nav>
         <AuthMenu />
-      </div>) : (<div>Menu</div>)}
+      </div>
     </header>
   )
 }

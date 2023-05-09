@@ -5,16 +5,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'bg-teal-500',
+        primary: '#b0cfbd',
+        primaryDarken: "#a0bdac",
         black: "#222",
+        white: "#fff",
         borderDark: "#333",
+        textGray: "#999"
       },
       fontSize: {
-        p: "18px",
-        button: "18px",
-        h1: '90px',
-        h2: '80px'
-      }
+        h1: '6rem',
+        h2: '5rem',
+        h3: '3.1rem',
+        l: "1.125rem",
+        p: "1.5rem",
+        xs: '1rem',
+        descriptor: "1.25rem",
+        button: "1.125rem",
+      },
     },
   },
   plugins: [],

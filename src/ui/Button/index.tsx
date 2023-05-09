@@ -15,6 +15,6 @@ export const Button: FC<ButtonProps> = ({
 }) => {
   const relativeStyles = className
   return (
-    <button className={`bg-teal-500 hover:bg-teal-600 duration-200 transition-colors px-5 py-2 text-black text-button font-medium rounded-[10px] ${relativeStyles ? relativeStyles : ''}`} {...otherProps}>{children}</button>
+    <button className={`bg-primary hover:bg-primaryDarken duration-200 transition-colors px-5 py-2 text-black text-button rounded-[10px] ${relativeStyles ? relativeStyles : ''}`} {...otherProps}>{children}</button>
   )
 }

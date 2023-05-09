@@ -15,7 +15,7 @@ const PageLayout: FC<PageLayoutProps> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className='pt-[80px] h-[2000px]'>
+      <main className="pt-[80px] h-[5000px] m-auto max-w-[2200px]">
         {children}
       </main>
     </>
