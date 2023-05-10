@@ -23,7 +23,8 @@ const config = {
       "images.unsplash.com",
       "drama.kropyva.ch",
       "image-cdn.essentiallysports.com",
-      "talksport.com"
+      "talksport.com",
+      "upload.wikimedia.org"
     ]
   }
 };

@@ -60,7 +60,7 @@ const Home: NextPage = () => {
         <span className="text-descriptor text-gray-700 border-l-4 border-l-primaryDarken pl-10 py-2 font-light">тренери</span>
         <div className="flex gap-10 justify-center flex-wrap mt-20">
           <div className="max-w-[400px] w-full">
-            <div className="bg-[url(https://drama.kropyva.ch/images/b/b4/%D0%9F%D0%B5%D1%82%D1%80%D0%BE_%D0%BC%D0%BE%D1%82%D0%B8%D0%B2%D1%83%D1%94.jpg)]
+            <div className="bg-[url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/%D0%9C%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D1%87%D1%83%D0%BA_%D0%9F%D0%B5%D1%82%D1%80%D0%BE_%D0%97%D0%A1%D0%A3.jpg/640px-%D0%9C%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D1%87%D1%83%D0%BA_%D0%9F%D0%B5%D1%82%D1%80%D0%BE_%D0%97%D0%A1%D0%A3.jpg)]
             w-full h-[500px] bg-cover bg-center
             "></div>
             <div className="mt-5">
