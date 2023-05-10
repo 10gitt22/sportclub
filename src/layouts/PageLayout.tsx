@@ -1,6 +1,7 @@
 import { type ReactNode, type FC } from 'react'
 import Head from 'next/head'
 import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer/Footer'
 
 type PageLayoutProps = {
   children: ReactNode
@@ -15,9 +16,10 @@ const PageLayout: FC<PageLayoutProps> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="pt-[80px] h-[5000px] m-auto max-w-[2200px]">
+      <main className="pt-[80px] m-auto max-w-[2200px]">
         {children}
       </main>
+      <Footer />
     </>
     
   )

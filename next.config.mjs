@@ -20,7 +20,10 @@ const config = {
   },
   images: {
     domains: [
-      "images.unsplash.com"
+      "images.unsplash.com",
+      "drama.kropyva.ch",
+      "image-cdn.essentiallysports.com",
+      "talksport.com"
     ]
   }
 };
