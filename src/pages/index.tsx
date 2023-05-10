@@ -141,7 +141,7 @@ const Home: NextPage = () => {
             <div className="">
               <ul className="flex flex-col list-image-[url(../../public/icons/check.svg)] list-inside">
                 <li>кількість занять: 12</li>
-                <li>тренер: немає</li>
+                <li>тренер: є</li>
                 <li>тривалість дії абонементу: 30 днів</li>
               </ul>
               <div className="flex justify-between items-center mt-10">
