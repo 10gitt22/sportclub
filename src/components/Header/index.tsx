@@ -3,8 +3,6 @@ import { DesktopMenu } from "./ui/DesktopMenu";
 import { MobileMenu } from "./ui/MobileMenu";
 import { useEffect, useState } from "react";
 
-
-
 export const Header = () => {
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
   const { width } = useWindowDimensions()
