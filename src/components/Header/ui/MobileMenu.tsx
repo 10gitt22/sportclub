@@ -20,7 +20,7 @@ const Menu: FC<MenuProps> = ({ closeMenu }) => {
 }
 
 export const MobileMenu = () => {
-  const [menuOpened, setMenuOpened] = useState(true)
+  const [menuOpened, setMenuOpened] = useState(false)
 
   const closeMenu = () => {
     setMenuOpened(false)
