@@ -3,8 +3,8 @@ import {
   publicProcedure,
 } from "@/server/api/trpc";
 
-export const trainerRouter = createTRPCRouter({
+export const abonementRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.prisma.trainer.findMany()
+    return await ctx.prisma.abonement.findMany()
   }),
 });

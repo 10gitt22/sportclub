@@ -33,6 +33,8 @@ model Trainer {
   lastName           String
   phoneNumber        String        @db.VarChar(15)
   trainerDescription String
+  trainerImage       String        @db.LongText
+  days               String        @db.VarChar(30)
   appointments       Appointment[]
 
   @@map("Trainers")

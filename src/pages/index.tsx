@@ -1,8 +1,21 @@
 import PageLayout from "@/layouts/PageLayout";
+import { prisma } from "@/server/db";
 import { Button } from "@/ui/Button";
-import { type NextPage } from "next";
+import { type InferGetStaticPropsType, type NextPage } from "next";
 
-const Home: NextPage = () => {
+export const getStaticProps = async () => {
+  const trainers = await prisma.trainer.findMany()
+  const abonements = await prisma.abonement.findMany()
+  return {
+    props: {
+      trainers,
+      abonements
+    }
+  }
+}
+type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
+
+const Home: NextPage<PageProps> = ({trainers, abonements}) => {
   return (
     <PageLayout>
       <section id="intro" className="px-5 lg:px-10 pt-[80px]">
@@ -59,97 +72,44 @@ const Home: NextPage = () => {
       <section id="trainers" className="px-5 lg:px-10 pt-[100px] md:pt-[120px]">
         <span className="text-descriptor text-gray-700 border-l-4 border-l-primaryDarken pl-10 py-2 font-light">тренери</span>
         <div className="flex gap-10 justify-center flex-wrap mt-20">
-          <div className="max-w-[400px] w-full">
-            <div className="bg-[url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/%D0%9C%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D1%87%D1%83%D0%BA_%D0%9F%D0%B5%D1%82%D1%80%D0%BE_%D0%97%D0%A1%D0%A3.jpg/640px-%D0%9C%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D1%87%D1%83%D0%BA_%D0%9F%D0%B5%D1%82%D1%80%D0%BE_%D0%97%D0%A1%D0%A3.jpg)]
-            w-full h-[500px] bg-cover bg-center
-            "></div>
-            <div className="mt-5">
-              <h3 className="text-h3">Петро Моставчук</h3>
-              <p className="text-p text-gray-400 font-light">тренер, мотиватор</p>
-              <p className="mt-2">дні занять: пн, вт, ср, чт, пт, сб, нд</p>
-            </div>
-          </div>
-          <div className="max-w-[400px] w-full">
-            <div className="bg-[url(https://image-cdn.essentiallysports.com/wp-content/uploads/Mike-OHearn.jpg)]
-            w-full h-[500px] bg-cover bg-center
-            "></div>
-            <div className="mt-5">
-              <h3 className="text-h3 w-[80%]">Майкл О&apos;Херн</h3>
-              <p className="text-p text-gray-400 font-light">тренер, бодібілдер</p>
-              <p className="mt-2">дні занять: вт, чт, сб, нд</p>
-            </div>
-          </div>
-          <div className="max-w-[400px] w-full">
-            <div className="bg-[url(https://talksport.com/wp-content/uploads/sites/5/2021/07/the-rock-raises-the-peoples-eyebrow.jpeg?strip=all&quality=100&w=960&h=540&crop=1)]
-            w-full h-[500px] bg-cover bg-center
-            "></div>
-            <div className="mt-5">
-              <h3 className="text-h3">Дуейн Джонсон</h3>
-              <p className="text-p text-gray-400 font-light">тренер, скала</p>
-              <p className="mt-2">дні занять: пн, ср, пт, нд</p>
-            </div>
-          </div>
+          {trainers.map(trainer => {
+            return (
+              <div className="max-w-[400px] w-full" key={trainer.id}>
+                <div 
+                  className={`w-full h-[500px] bg-cover bg-center`}
+                  style={{backgroundImage: `url(${trainer.trainerImage})`}}
+                ></div>
+                <div className="mt-5">
+                  <h3 className="text-h3">{trainer.firstName} {trainer.lastName}</h3>
+                  <p className="text-p text-gray-400 font-light">{trainer.trainerDescription}</p>
+                  <p className="mt-2">дні занять: {trainer.days}</p>
+                </div>
+              </div>
+            )
+          })} 
         </div>
       </section>
       <section id="abonements" className="px-5 lg:px-10 pt-[100px] pb-[150px] md:pt-[120px]">
         <span className="text-descriptor text-gray-700 border-l-4 border-l-primaryDarken pl-10 py-2 font-light">абонементи</span>
         <div className="flex flex-wrap gap-10 justify-center mt-20">
-          <div className="max-w-[400px] h-[300px] md:h-[500px] flex flex-col bg-borderDark text-white rounded-[10px] justify-between w-full shadow-lg p-10">
-            <h3 className="text-h3">Стандарт</h3>
-            <div className="">
-              <ul className="flex flex-col list-image-[url(../../public/icons/check.svg)] list-inside">
-                <li>кількість занять: 1</li>
-                <li>тренер: немає</li>
-                <li>тривалість дії абонементу: 3 дні</li>
-              </ul>
-              <div className="flex justify-between items-center mt-10">
-                <div className=" text-[2rem] font-bold">300 грн</div>
-                <Button>придбати</Button>
+          {abonements.map(abonement => {
+            return (
+              <div key={abonement.id} className="max-w-[400px] h-[300px] md:h-[500px] flex flex-col bg-borderDark text-white rounded-[10px] justify-between w-full shadow-lg p-10">
+                <h3 className="text-h3">{abonement.abonementName}</h3>
+                <div>
+                  <ul className="flex flex-col list-image-[url(../../public/icons/check.svg)] list-inside">
+                    <li>кількість занять: {abonement.sessionsCount}</li>
+                    <li>тренер: {abonement.trainerIncluded ? "є" : "немає"}</li>
+                    <li>тривалість дії абонементу: {abonement.duration} дні</li>
+                  </ul>
+                  <div className="flex justify-between items-center mt-10">
+                    <div className=" text-[2rem] font-bold">{abonement.price} грн</div>
+                    <Button>придбати</Button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="max-w-[400px] h-[300px] md:h-[500px] flex flex-col bg-borderDark text-white rounded-[10px] justify-between w-full shadow-lg p-10">
-            <h3 className="text-h3">Стандарт з тренером</h3>
-            <div className="">
-              <ul className="flex flex-col list-image-[url(../../public/icons/check.svg)] list-inside">
-                <li>кількість занять: 1</li>
-                <li>тренер: є</li>
-                <li>тривалість дії абонементу: 3 дні</li>
-              </ul>
-              <div className="flex justify-between items-center mt-10">
-                <div className=" text-[2rem] font-bold">500 грн</div>
-                <Button>придбати</Button>
-              </div>
-            </div>
-          </div>
-          <div className="max-w-[400px] h-[300px] md:h-[500px] flex flex-col bg-borderDark text-white rounded-[10px] justify-between w-full shadow-lg p-10">
-            <h3 className="text-h3">Місяць стандарт</h3>
-            <div className="">
-              <ul className="flex flex-col list-image-[url(../../public/icons/check.svg)] list-inside">
-                <li>кількість занять: 12</li>
-                <li>тренер: немає</li>
-                <li>тривалість дії абонементу: 30 днів</li>
-              </ul>
-              <div className="flex justify-between items-center mt-10">
-                <div className=" text-[2rem] font-bold">3000 грн</div>
-                <Button>придбати</Button>
-              </div>
-            </div>
-          </div>
-          <div className="max-w-[400px] h-[300px] md:h-[500px] flex flex-col bg-borderDark text-white rounded-[10px] justify-between w-full shadow-lg p-10">
-            <h3 className="text-h3">Місяць про</h3>
-            <div className="">
-              <ul className="flex flex-col list-image-[url(../../public/icons/check.svg)] list-inside">
-                <li>кількість занять: 12</li>
-                <li>тренер: є</li>
-                <li>тривалість дії абонементу: 30 днів</li>
-              </ul>
-              <div className="flex justify-between items-center mt-10">
-                <div className=" text-[2rem] font-bold">5000 грн</div>
-                <Button>придбати</Button>
-              </div>
-            </div>
-          </div>
+            )
+          })}
         </div>
       </section>
     </PageLayout>
