@@ -22,6 +22,8 @@ model Client {
   lastName     String
   phoneNumber  String        @db.VarChar(15)
   email        String        @unique
+  userId       String        @unique
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   appointments Appointment[]
 
   @@map("Clients")
@@ -102,6 +104,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  profile       Client?
   accounts      Account[]
   sessions      Session[]
 }

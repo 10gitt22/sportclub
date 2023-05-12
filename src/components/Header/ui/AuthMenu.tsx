@@ -4,8 +4,6 @@ import { type FC } from "react";
 
 export const AuthMenu: FC = () => {
   const { data: sessionData } = useSession();
-  console.log(sessionData);
-  
   return (
     <div className="flex items-center justify-center gap-5">
       <p className="text-center text-l font-bold text-black">

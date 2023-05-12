@@ -1,9 +1,11 @@
+import { type FC } from "react";
 import { type InferGetStaticPropsType, type NextPage } from "next";
+
+import { type Abonement, type Trainer } from "@prisma/client";
+
 import PageLayout from "@/layouts/PageLayout";
 import { prisma } from "@/server/db";
 import { Button } from "@/ui/Button";
-import { type FC } from "react";
-import { type Abonement, type Trainer } from "@prisma/client";
 
 const IntroSection: FC = () => {
   return (
@@ -124,7 +126,7 @@ const Home: NextPage<PageProps> = ({trainers, abonements}) => {
     <PageLayout>
       <IntroSection />
       <AboutSection />
-      <TrainersSection trainers={trainers}/>
+      <TrainersSection trainers={trainers}/> 
       <AbonementsSection abonements={abonements}/>
     </PageLayout>
   );
@@ -132,9 +134,10 @@ const Home: NextPage<PageProps> = ({trainers, abonements}) => {
 
 export default Home;
 
-export const getStaticProps = async () => {
+export const getStaticProps = async () => {  
   const trainers = await prisma.trainer.findMany()
   const abonements = await prisma.abonement.findMany()
+
   return {
     props: {
       trainers,
@@ -142,4 +145,5 @@ export const getStaticProps = async () => {
     }
   }
 }
+
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
