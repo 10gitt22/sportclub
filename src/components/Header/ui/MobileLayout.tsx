@@ -1,6 +1,5 @@
+import { type FC, useState, type ReactNode } from "react"
 import Link from "next/link"
-import { type FC, useState } from "react"
-import { AuthMenu } from "./AuthMenu"
 
 type MenuProps = {
   closeMenu: () => void
@@ -19,7 +18,13 @@ const Menu: FC<MenuProps> = ({ closeMenu }) => {
   )
 }
 
-export const MobileMenu = () => {
+
+
+type MobileLayoutProps = {
+  children: ReactNode
+}
+
+export const MobileLayout: FC<MobileLayoutProps> = ({ children }) => {
   const [menuOpened, setMenuOpened] = useState(false)
 
   const closeMenu = () => {
@@ -33,7 +38,7 @@ export const MobileMenu = () => {
   return (
     <div className="flex items-center gap-5 text-l">
       <div className="font-medium hover:cursor-pointer" onClick={toggleMenu}>{menuOpened ? "закрити" : "меню"}</div>
-      <AuthMenu />
+      { children }
       {menuOpened && <Menu closeMenu={closeMenu}/>}
     </div>
   )

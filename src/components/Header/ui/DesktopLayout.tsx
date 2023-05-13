@@ -1,8 +1,12 @@
 
+import { type ReactNode, type FC } from "react"
 import Link from "next/link"
-import { AuthMenu } from "./AuthMenu"
 
-export const DesktopMenu = () => {
+type DesktopLayoutProps = {
+  children: ReactNode
+}
+
+export const DesktopLayout: FC<DesktopLayoutProps> = ({children}) => {
   return (
     <div className="flex items-center gap-5 text-l font-normal">
       <nav className="flex gap-5">
@@ -11,7 +15,7 @@ export const DesktopMenu = () => {
         <Link className="hover:text-teal-500 transition-colors duration-200" href={'/#trainers'} scroll={false}>тренери</Link>
         <Link className="hover:text-teal-500 transition-colors duration-200" href={'/#abonements'} scroll={false}>абонементи</Link>
       </nav>
-      <AuthMenu />
+      { children }
     </div>
   )
 }

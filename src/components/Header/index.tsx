@@ -1,7 +1,8 @@
 import useWindowDimensions from "@/hooks/useWindowDimentions";
-import { DesktopMenu } from "./ui/DesktopMenu";
-import { MobileMenu } from "./ui/MobileMenu";
+import { DesktopLayout } from "./ui/DesktopLayout";
+import { MobileLayout } from "./ui/MobileLayout";
 import { useEffect, useState } from "react";
+import { UserMenu } from "./ui/UserMenu";
 
 export const Header = () => {
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
@@ -27,7 +28,9 @@ export const Header = () => {
         sportclub        
       </div>
       {
-        width > 1200 ? (<DesktopMenu />) : (<MobileMenu />) 
+        width > 1200 ? 
+          (<DesktopLayout ><UserMenu /></DesktopLayout>) : 
+          (<MobileLayout ><UserMenu /></MobileLayout>) 
       }
     </header>
   )
