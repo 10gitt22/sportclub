@@ -1,9 +1,11 @@
-import useWindowDimensions from "@/hooks/useWindowDimentions";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
 import { DesktopLayout } from "./ui/DesktopLayout";
 import { MobileLayout } from "./ui/MobileLayout";
-import { useEffect, useState } from "react";
 import { UserMenu } from "./ui/UserMenu";
-import Link from "next/link";
+
+import useWindowDimensions from "@/hooks/useWindowDimentions";
 
 export const Header = () => {
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);

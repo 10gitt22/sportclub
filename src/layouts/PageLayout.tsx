@@ -13,7 +13,7 @@ const PageLayout: FC<PageLayoutProps> = ({ children }) => {
       <Head>
         <title>sportclub</title>
         <meta name="description" content="site of sportclub" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/icons/logo.svg" />
       </Head>
       <Header />
       <main className="pt-[80px] m-auto max-w-[2200px]">
