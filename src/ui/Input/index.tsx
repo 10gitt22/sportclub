@@ -1,4 +1,4 @@
-import React, { useCallback, type ChangeEvent, type FC, type InputHTMLAttributes, useMemo, memo } from 'react'
+import React, { useCallback, type ChangeEvent, type FC, type InputHTMLAttributes, useMemo, memo, useEffect } from 'react'
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
 
@@ -31,16 +31,24 @@ export const Input: FC<InputProps> = memo(({
   const onChangeFunction = useMemo(() => {
     return onChange ? onChangeHandler : onChangeFormik
   }, [onChangeHandler, onChangeFormik])
+
+
+  console.log(error, 'error');
+
+
   return (
-    <input 
-      type={type}
-      value={value}
-      name={name}
-      className={`w-full px-5 py-3 outline-none border border-black rounded-[5px] disabled:bg-gray-200 ${className ? className : ''}`}
-      onChange={onChangeFunction}
-      placeholder={placeholder}
-      autoComplete="off"
-      {...props}
-    />
+    <div className='flex flex-col gap-1'>
+      <input 
+        type={type}
+        value={value}
+        name={name}
+        className={`w-full px-5 py-3 outline-none transition-colors border border-black rounded-[5px] disabled:bg-gray-200 ${error ? ' border-red-500 text-red-500' : '' } ${className ? className : ''}`}
+        onChange={onChangeFunction}
+        placeholder={placeholder}
+        autoComplete="off"
+        {...props}
+      />
+      {error && <span className='text-red-500'>{error}</span>}
+    </div>
   )
 })

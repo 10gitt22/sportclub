@@ -32,7 +32,7 @@ export const MobileMenu = () => {
 
   return (
     <div className="flex items-center gap-5 text-l">
-      <div className="font-medium" onClick={toggleMenu}>меню</div>
+      <div className="font-medium hover:cursor-pointer" onClick={toggleMenu}>{menuOpened ? "закрити" : "меню"}</div>
       <AuthMenu />
       {menuOpened && <Menu closeMenu={closeMenu}/>}
     </div>
