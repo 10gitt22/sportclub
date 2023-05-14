@@ -32,10 +32,6 @@ export const Input: FC<InputProps> = memo(({
     return onChange ? onChangeHandler : onChangeFormik
   }, [onChangeHandler, onChangeFormik])
 
-
-  console.log(error, 'error');
-
-
   return (
     <div className='flex flex-col gap-1'>
       <input 

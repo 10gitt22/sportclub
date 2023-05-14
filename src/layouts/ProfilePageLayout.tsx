@@ -40,8 +40,6 @@ export const ProfilePageLayout: FC<ProfilePageLayoutProps> = ({ children }) => {
   const { push } = useRouter()
 
   useEffect(() => {
-    console.log(status, 'status changed');
-    
     if (status === "unauthenticated") {    
       toast.error('401: Ви не авторизовані')
       void push('/')

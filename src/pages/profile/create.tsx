@@ -117,7 +117,6 @@ const ProfileForm: FC<ProfileFormProps> = memo(({ user }) => {
   )
 })
 
-
 const CreateProfile = ({ ...props }) => {
   const { user, profile } = props as CreateProfilePageProps
   const { push } = useRouter()
