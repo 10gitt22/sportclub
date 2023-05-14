@@ -7,6 +7,7 @@ import { Button } from "@/ui/Button";
 
 import { useOutsideAlerter } from "@/hooks/useOutsideAlerter";
 import { useRouter } from "next/router";
+import { ThreeDots } from "react-loader-spinner";
 
 type MenuDropdownProps = {
   user: Session['user']
@@ -57,10 +58,22 @@ const MenuDropdown: FC<MenuDropdownProps> = memo(({ user }) => {
 })
 
 export const UserMenu: FC = () => {
-  const { data: sessionData } = useSession();
+  const { data: sessionData, status } = useSession();
   
   const handleSignIn = () => {
     void signIn()
+  }
+
+  if (status === "loading") {
+    return (
+      <div className="flex items-center justify-center gap-5">
+        <ThreeDots 
+          width={20}
+          height={20}
+          color="#222"
+        />
+      </div>
+    )
   }
 
   return (
