@@ -1,15 +1,7 @@
 import PageLayout from "@/layouts/PageLayout";
-import { ProfilePageLayout, type ProfilePageProps } from "@/layouts/ProfilePageLayout";
+import { ProfilePageLayout } from "@/layouts/ProfilePageLayout";
+import { Profile } from "@/modules/profile";
 
-const Profile = ({ ...props }) => { 
-  const { user, profile } = props as ProfilePageProps  
-
-  return (
-    <div className="h-screen p-10">
-      <h1 className="text-h2">{user.name}</h1>
-    </div>
-  )
-}
 
 const ProfilePage = () => {
   return (

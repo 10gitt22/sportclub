@@ -19,7 +19,7 @@ const PageLayout: FC<PageLayoutProps> = ({ children }) => {
       <main className="pt-[80px] m-auto max-w-[2200px]">
         {children}
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
     
   )

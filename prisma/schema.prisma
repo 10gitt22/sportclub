@@ -22,6 +22,7 @@ model Client {
   lastName     String
   phoneNumber  String        @db.VarChar(15)
   email        String        @unique
+  profileImage String?       @db.LongText
   userId       String        @unique
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   appointments Appointment[]

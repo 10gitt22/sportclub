@@ -16,11 +16,13 @@ type ProfilePageLayoutProps = {
 export type ProfilePageProps = {
   user: Session['user']
   profile: Client
+  refetch: () => Promise<void>
 }
 
 export type CreateProfilePageProps = {
   user: Session['user']
-  profile: Client  | null
+  profile: Client | null
+  refetch: () => Promise<void>
 }
 
 type ChildrenProps = ProfilePageProps | CreateProfilePageProps
@@ -36,6 +38,7 @@ function addPropsToReactElement(element: ReactElement, props: ChildrenProps) {
 export const ProfilePageLayout: FC<ProfilePageLayoutProps> = ({ children }) => {
   const { data: sessionData, status } = useSession()
   const { data: profile, isLoading } = api.profile.getProfile.useQuery()
+  const utils = api.useContext()
 
   const { push } = useRouter()
 
@@ -46,6 +49,10 @@ export const ProfilePageLayout: FC<ProfilePageLayoutProps> = ({ children }) => {
       return
     }
   }, [status])
+
+  const refetchProfile = () => {
+    return utils.profile.getProfile.invalidate()
+  }
 
   if (status === "loading" || isLoading) {
     return (
@@ -66,7 +73,7 @@ export const ProfilePageLayout: FC<ProfilePageLayoutProps> = ({ children }) => {
     )
   }
 
-  const childrenWithProps = addPropsToReactElement(children, { user: sessionData.user, profile: profile || null })
+  const childrenWithProps = addPropsToReactElement(children, { user: sessionData.user, profile: profile || null, refetch: refetchProfile })
   
   return (
     <>{childrenWithProps}</>

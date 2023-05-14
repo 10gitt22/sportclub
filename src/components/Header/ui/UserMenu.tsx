@@ -47,7 +47,7 @@ const MenuDropdown: FC<MenuDropdownProps> = memo(({ user }) => {
       {
         menuOpened && (
           <div className="absolute z-10 min-w-[200px] max-[500px]:mr-[175px] flex flex-col border border-black top-full bg-white shadow-md mt-5 rounded-[5px] w-full">
-            <Link className="px-5 py-4 rounded-t-[5px] transition-colors border-b hover:bg-primary" href="/profile">мої тренування</Link>
+            <Link className="px-5 py-4 rounded-t-[5px] transition-colors border-b hover:bg-primary" href="/profile">мій профіль</Link>
             {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
             <div className="px-5 py-4 rounded-b-[5px] transition-colors hover:bg-primary" onClick={handleSignOut}>вийти</div>
           </div>
