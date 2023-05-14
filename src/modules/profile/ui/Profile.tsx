@@ -36,10 +36,10 @@ export const Profile = ({ ...props }) => {
     <div className="py-10 px-10">
       {/* <ProfileForm profile={profile} saving={updatingProfile} onSave={updateProfile}/> */}
       <div className="w-full flex flex-col lg:flex-row">
-        <div className="flex flex-col overflow-hidden px-10 py-10 min-w-[300px] max-w-[400px] md:w-auto">
+        <div className="flex flex-col m-auto md:ml-0 overflow-hidden py-10 w-full min-w-[250px] max-w-[400px] md:w-auto">
           {profile.profileImage ? (
             <div 
-              className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] rounded-[220px] bg-cover bg-center"
+              className="w-[150px] h-[150px] self-center md:self-start md:w-[200px] md:h-[200px] rounded-[220px] bg-cover bg-center"
               style={{backgroundImage: `url(${profile.profileImage})`}}
             ></div>
           ) : (
@@ -53,7 +53,7 @@ export const Profile = ({ ...props }) => {
           <button className="w-full border border-black px-10 py-2 mt-5 text-button rounded-[5px] hover:bg-black hover:text-white transition-colors">редагувати профіль</button>
 
         </div>
-        <div className="h-full border-t lg:border-none py-10 lg:mt-0 px-10">
+        <div className="h-full border-t flex-grow lg:border-none py-10 lg:mt-0 lg:pl-10">
           <h3 className="text-4xl">мої тренування:</h3>
           <div className="mt-5 text-p font-light">ще нема тренувань 🤷‍♂️</div>
         </div>
