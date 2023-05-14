@@ -38,6 +38,10 @@ body {
   color: #222;
 }
 
+#nprogress .spinner { 
+  display: none!important;
+}
+
 @media (max-width: 768px) {
   html {
     font-size: 10px;

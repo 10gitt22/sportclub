@@ -2,9 +2,9 @@ import { signIn } from "next-auth/react"
 import Image from "next/image"
 import google_icon from 'public/icons/google.svg'
 
-const Signin = () => {
+const SignInPage = () => {
   const handleSignIn = async () => {
-    await signIn('google', {callbackUrl: `${window.location.origin}/create-profile`})
+    await signIn('google', {callbackUrl: `${window.location.origin}/profile/create`})
   }
   
   return (
@@ -18,4 +18,4 @@ const Signin = () => {
   )
 }
 
-export default Signin
+export default SignInPage

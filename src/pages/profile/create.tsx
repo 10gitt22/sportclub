@@ -1,6 +1,5 @@
-import { useEffect, type FC, memo } from "react";
+import { type FC, memo } from "react";
 import { type Session } from "next-auth";
-import { useSession } from "next-auth/react"
 import { useRouter } from "next/router";
 
 import { useFormik } from "formik";
@@ -8,7 +7,7 @@ import { type TypeOf, z } from "zod";
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 
 import { toast } from 'react-hot-toast'
-import { Loader } from "@/components/Loader";
+import { ProfilePageLayout, type CreateProfilePageProps } from "@/layouts/ProfilePageLayout";
 import { Input } from "@/ui/Input";
 
 import { api } from "@/utils/api";
@@ -30,7 +29,6 @@ const createProfileSchema = z.object({
   email: z.string(),
 })
 
-
 type ProfileFormProps = {
   user: Session['user']
 }
@@ -39,9 +37,8 @@ type ClientToCreate = TypeOf<typeof createProfileSchema>
 const ProfileForm: FC<ProfileFormProps> = memo(({ user }) => {  
   const { push } = useRouter() 
   const { firstName, lastName } = splitDisplayName(user.name)
-  
 
-  const {mutate, isLoading: creatingProfile} = api.profile.createProfile.useMutation({
+  const { mutate, isLoading: creatingProfile } = api.profile.createProfile.useMutation({
     onSuccess: () => {
       toast.success("Профіль створено успішно!")
       void push('/')
@@ -121,55 +118,35 @@ const ProfileForm: FC<ProfileFormProps> = memo(({ user }) => {
 })
 
 
-const Profile = () => {
-  const { data: sessionData, status } = useSession()
-  const { data: profile, isLoading } = api.profile.getProfile.useQuery()
-
+const CreateProfile = ({ ...props }) => {
+  const { user, profile } = props as CreateProfilePageProps
   const { push } = useRouter()
 
-  useEffect(() => {
-    if (status === "unauthenticated") {    
-      toast.error('401: Ви не авторизовані')
-      void push('/')
-      return
-    }
-  }, [status])
-
-  if (isLoading || status === "loading") {
-    return (
-      <div className="flex justify-center items-center h-screen w-full">
-        <Loader />
-      </div>
-    )
+  if (profile) {
+    void push('/profile')
+    return null
   }
 
-  if(profile) {
-    void push('/')
-    return
-  }
-
-  if (!sessionData?.user.email) {
-    return (
-      <div className="flex justify-center items-center h-screen w-full">
-        <div className="flex flex-col items-center">
-          <h1 className="text-h1">404</h1>
-          <span className="text-descriptor">користувача не знайдено 🤷‍♂️</span>
-        </div>
-      </div>
-    )
-  }
-
-  return ( 
+  return (
     <div className="flex justify-center items-center h-screen w-full">
       <div className="flex flex-col items-center">
         <h1 className="text-h1">sportclub</h1>
         <p className="text-p">заповніть профіль 💁‍♂️</p>
-        <ProfileForm user={sessionData.user}/>
+        <ProfileForm user={user}/>
       </div>
     </div>
   )
 }
 
-export default Profile
+
+const CreateProfilePage = () => {
+  return (
+    <ProfilePageLayout>
+      <CreateProfile />
+    </ProfilePageLayout>
+  )
+}
+
+export default CreateProfilePage
 
 

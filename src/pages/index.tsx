@@ -121,7 +121,7 @@ const AbonementsSection: FC<{abonements: Abonement[]}> = ({abonements}) => {
   )
 }
 
-const Home: NextPage<PageProps> = ({trainers, abonements}) => {
+const HomePage: NextPage<PageProps> = ({trainers, abonements}) => {
   return (
     <PageLayout>
       <IntroSection />
@@ -132,7 +132,7 @@ const Home: NextPage<PageProps> = ({trainers, abonements}) => {
   );
 };
 
-export default Home;
+export default HomePage;
 
 export const getStaticProps = async () => {  
   const trainers = await prisma.trainer.findMany()

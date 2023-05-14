@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "@/ui/Button";
 
 import { useOutsideAlerter } from "@/hooks/useOutsideAlerter";
+import { useRouter } from "next/router";
 
 type MenuDropdownProps = {
   user: Session['user']
@@ -13,11 +14,17 @@ type MenuDropdownProps = {
 
 const MenuDropdown: FC<MenuDropdownProps> = memo(({ user }) => {
   const [menuOpened, setMenuOpened] = useState(false)
+  const { push } = useRouter()
   const container = useRef(null)
   useOutsideAlerter({ ref: container, callback: () => setMenuOpened(false) })
   
   const toggleUserMenu = () => {
     setMenuOpened(prev => !prev)
+  }
+
+  const handleSignOut = async () => {
+    void await push('/')
+    void signOut()
   }
 
   return (
@@ -32,15 +39,16 @@ const MenuDropdown: FC<MenuDropdownProps> = memo(({ user }) => {
           user.image ? (
             <div className={`w-[30px] h-[30px] md:w-[40px] md:h-[40px] bg-cover rounded-[40px]`} style={{ backgroundImage: `url(${user.image})` }}></div>
           ) : (
-            <div className="w-[30px] h-[30px] md:w-[40px] md:h-[40px]  rounded-[40px]"></div>
+            <div className="w-[30px] h-[30px] md:w-[40px] md:h-[40px] rounded-[40px]"></div>
           )
         }
       </div>
       {
         menuOpened && (
-          <div className="absolute z-10 min-w-[200px] max-[500px]:mr-10 flex flex-col border border-black top-full bg-white shadow-md mt-5 rounded-[5px] w-full">
-            <Link className="px-5 py-4 rounded-t-[5px] transition-colors border-b hover:bg-primary" href="/user/profile">профіль</Link>
-            <Link className="px-5 py-4 rounded-b-[5px] transition-colors hover:bg-primary" href="/user/appointments">мої тренування</Link>
+          <div className="absolute z-10 min-w-[200px] max-[500px]:mr-[175px] flex flex-col border border-black top-full bg-white shadow-md mt-5 rounded-[5px] w-full">
+            <Link className="px-5 py-4 rounded-t-[5px] transition-colors border-b hover:bg-primary" href="/profile">мої тренування</Link>
+            {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+            <div className="px-5 py-4 rounded-b-[5px] transition-colors hover:bg-primary" onClick={handleSignOut}>вийти</div>
           </div>
         )
       }
@@ -55,18 +63,10 @@ export const UserMenu: FC = () => {
     void signIn()
   }
 
-  const handleSignOut = () => {
-    void signOut()
-  }
-
-
   return (
     <div className="flex items-center justify-center gap-5">
       {sessionData ? 
-        <>
-          <MenuDropdown user={sessionData.user} />
-          <Button onClick={handleSignOut}>вийти</Button>
-        </>
+        <MenuDropdown user={sessionData.user} />
         : 
         <Button onClick={handleSignIn}>увійти</Button>
       }
