@@ -66,7 +66,7 @@ export const ProfileForm: FC<ProfileFormProps> = memo(({ profile, saving, onSave
         autoComplete="off" 
         value={values.phoneNumber} 
         onChangeFormik={handleChange}
-        minLength={11} 
+        minLength={10} 
         maxLength={13} 
         required
       />  

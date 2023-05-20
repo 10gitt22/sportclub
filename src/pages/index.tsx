@@ -129,7 +129,7 @@ const AbonementsSection: FC<{abonements: Abonement[]}> = ({abonements}) => {
   )
 }
 
-const HomePage: NextPage<PageProps> = ({trainers, abonements}) => {
+const HomePage: NextPage<PageProps> = ({ trainers, abonements }) => {
   return (
     <PageLayout>
       <IntroSection />
