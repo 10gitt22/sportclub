@@ -17,7 +17,7 @@ export const Header = () => {
 
 
   if (!width || !initialRenderComplete) return (
-    <header className="fixed top-0 w-full h-[80px] bg-white flex justify-between items-center px-5 lg:px-10">
+    <header className="fixed z-[2] top-0 w-full h-[80px] bg-white flex justify-between items-center px-5 lg:px-10">
       <div className="text-4xl font-bold">
         <Link href={'/'}>sportclub</Link>      
       </div>
@@ -26,7 +26,7 @@ export const Header = () => {
   )
 
   return (
-    <header className="fixed top-0 w-full h-[80px] bg-white flex justify-between items-center px-5 lg:px-10">
+    <header className="fixed top-0 z-[2] w-full h-[80px] bg-white flex justify-between items-center px-5 lg:px-10">
       <div className="text-4xl font-bold">
         <Link href={'/'}>sportclub </Link>         
       </div>
