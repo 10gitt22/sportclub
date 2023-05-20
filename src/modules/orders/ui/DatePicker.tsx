@@ -40,7 +40,7 @@ export const DatePicker: FC<DatePickerProps> = memo(({ startDate, abonementDurat
     <div className="text-p flex flex-col py-2 mt-5">
       <span className="mb-2">оберіть початкову дату:</span>
       <div className="flex flex-col gap-2">
-        <input className="lg:w-[250px] outline-none text-xs border rounded-[5px] py-3 px-5 lg:py-2" type="date" value={startDate} onChange={handleChangeDate}/>
+        <input className="w-full lg:w-[250px] outline-none text-xs border rounded-[5px] py-3 px-5 lg:py-2" type="date" value={startDate} onChange={handleChangeDate}/>
         <div className="text-xs px-3">запис можна здійснювати не більше ніж на 7 днів уперед</div>
         {startDate !== '' && (<div className="text-xs px-3 text-green-600">дійсний до <span className=" whitespace-nowrap">{dateToRender(addDays(startDate, abonementDuration))}</span></div>)}
       </div>
