@@ -1,11 +1,12 @@
 import { type FC } from "react";
 import { type InferGetStaticPropsType, type NextPage } from "next";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 import { type Abonement, type Trainer } from "@prisma/client";
 
 import PageLayout from "@/layouts/PageLayout";
 import { prisma } from "@/server/db";
-import { Button } from "@/ui/Button";
 
 const IntroSection: FC = () => {
   return (
@@ -94,11 +95,15 @@ const TrainersSection: FC<{trainers: Trainer[]}> = ({trainers}) => {
 }
 
 const AbonementsSection: FC<{abonements: Abonement[]}> = ({abonements}) => {
+  const { data: sessionData } = useSession()
   return (
     <section id="abonements" className="px-5 lg:px-10 pt-[100px] pb-[150px] md:pt-[120px]">
       <span className="text-descriptor text-gray-700 border-l-4 border-l-primaryDarken pl-10 py-2 font-light">абонементи</span>
       <div className="flex flex-wrap gap-10 justify-center mt-20">
         {abonements.map(abonement => {
+          const orderPath = `orders/abonement/${abonement.id}`
+          const signInUrl = `sign-in` 
+          const url = sessionData ? orderPath : `${signInUrl}?redirectToPath=${orderPath}` 
           return (
             <div key={abonement.id} className="max-w-[400px] h-[300px] md:h-[500px] flex flex-col bg-borderDark text-white rounded-[10px] justify-between w-full shadow-lg p-10">
               <h3 className="text-h3">{abonement.abonementName}</h3>
@@ -110,7 +115,7 @@ const AbonementsSection: FC<{abonements: Abonement[]}> = ({abonements}) => {
                 </ul>
                 <div className="flex justify-between items-center mt-10">
                   <div className=" text-[2rem] font-bold">{abonement.price} грн</div>
-                  <Button>придбати</Button>
+                  <Link href={url} className=" bg-primary text-black px-5 py-2 rounded-[5px] transition-colors hover:bg-primaryDarken">придбати</Link>
                 </div>
               </div>
             </div>

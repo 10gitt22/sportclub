@@ -1,10 +1,18 @@
 import { signIn } from "next-auth/react"
 import Image from "next/image"
+import { useRouter } from "next/router"
 import google_icon from 'public/icons/google.svg'
 
 const SignInPage = () => {
+  const { query } = useRouter()
+
   const handleSignIn = async () => {
-    await signIn('google', {callbackUrl: `${window.location.origin}/profile/create`})
+    let url = `${window.location.origin}/profile/create`
+    if (query.redirectToPath) {
+      url = `${url}?redirectToPath=${query.redirectToPath as string}`
+    }
+
+    await signIn('google', {callbackUrl: url})
   }
   
   return (

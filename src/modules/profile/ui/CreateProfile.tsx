@@ -12,7 +12,7 @@ import { api } from "@/utils/api"
 export const CreateProfile = ({ ...props }) => {
   const { user, profile, refetch } = props as CreateProfilePageProps
   const { firstName, lastName } = splitDisplayName(user.name)
-  const { push } = useRouter()
+  const { push, query } = useRouter()
 
   const initProfile: Profile = useMemo(() => {
     return {
@@ -26,7 +26,12 @@ export const CreateProfile = ({ ...props }) => {
   const { mutate, isLoading: creatingProfile } = api.profile.createProfile.useMutation({
     onSuccess: async () => {
       toast.success("Профіль створено успішно!")
-      void push('/')
+      if (query.redirectToPath) {
+        void push(`/${query.redirectToPath as string}`)  
+      } else {
+        void push('/')
+      }
+
       await refetch()
     },
     onError: (e) => {
@@ -40,6 +45,12 @@ export const CreateProfile = ({ ...props }) => {
       userId: user.id,
       profileImage: user.image || null
     })
+  }
+
+
+  if (profile && query.redirectToPath) {
+    void push(`/${query.redirectToPath as string}`)
+    return <></>
   }
 
   if (profile) {
