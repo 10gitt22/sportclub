@@ -82,7 +82,10 @@ const TrainersSection: FC<{trainers: Trainer[]}> = ({trainers}) => {
                 style={{backgroundImage: `url(${trainer.trainerImage})`}}
               ></div>
               <div className="mt-5">
-                <h3 className="text-h3">{trainer.firstName} {trainer.lastName}</h3>
+                <h3 className="text-h3 flex flex-col">
+                  <span>{trainer.firstName}</span>
+                  <span>{trainer.lastName}</span>
+                </h3>
                 <p className="text-p text-gray-400 font-light">{trainer.trainerDescription}</p>
                 <p className="mt-2">дні занять: {trainer.days}</p>
               </div>
@@ -111,7 +114,7 @@ const AbonementsSection: FC<{abonements: Abonement[]}> = ({abonements}) => {
                 <ul className="flex flex-col list-image-[url(../../public/icons/check.svg)] list-inside">
                   <li>кількість занять: {abonement.sessionsCount}</li>
                   <li>тренер: {abonement.trainerIncluded ? "є" : "немає"}</li>
-                  <li>тривалість дії абонементу: {abonement.duration} дні</li>
+                  <li>тривалість дії абонементу: {abonement.duration} дні(в)</li>
                 </ul>
                 <div className="flex justify-between items-center mt-10">
                   <div className=" text-[2rem] font-bold">{abonement.price} грн</div>

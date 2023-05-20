@@ -68,7 +68,7 @@ export const Profile = ({ ...props }) => {
         <div className="h-full border-t flex-grow lg:border-none py-10 lg:mt-0 lg:pl-10">
           <h3 className="text-4xl">мої тренування:</h3>
           <div className="mt-5 text-p font-light">ще нема тренувань 🤷‍♂️</div>
-          <Link href={'/#abonements'} className="text-p block mt-10 underline">записатись {'->'}</Link>
+          <Link href={'/#abonements'} className="text-p block mt-10 underline">записатися {'->'}</Link>
         </div>
       </div>
       {

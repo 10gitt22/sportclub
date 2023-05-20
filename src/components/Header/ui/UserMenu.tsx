@@ -38,9 +38,9 @@ const MenuDropdown: FC<MenuDropdownProps> = memo(({ user }) => {
       <div className="flex">
         {
           user.image ? (
-            <div className={`w-[30px] h-[30px] md:w-[40px] md:h-[40px] bg-cover bg-[#222] rounded-[40px]`} style={{ backgroundImage: `url(${user.image})` }}></div>
+            <div className={`w-[30px] h-[30px] md:w-[40px] flex items-center justify-center md:h-[40px] bg-cover bg-[#222] rounded-[40px]`} style={{ backgroundImage: `url(${user.image})` }}></div>
           ) : (
-            <div className="w-[30px] h-[30px] md:w-[40px] md:h-[40px] rounded-[40px]"></div>
+            <div className="w-[30px] h-[30px] text-white flex items-center justify-center md:w-[40px] md:h-[40px] bg-[#222] rounded-[40px]">{user.name ? user.name[0]?.toUpperCase() : '🙎‍♂️'}</div>
           )
         }
       </div>
