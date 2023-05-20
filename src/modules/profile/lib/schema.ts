@@ -10,7 +10,7 @@ export const profileSchema = z.object({
   phoneNumber: 
     z.string()
       .regex(new RegExp(/^[+0-9]+$/), 'некоректно введені дані')
-      .min(10, 'мінімально 10 символів')
+      .min(11, 'мінімально 11 символів')
       .max(13, 'максимально 13 символів'),
   email: z.string(),
 })
