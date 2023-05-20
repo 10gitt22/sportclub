@@ -15,5 +15,26 @@ export const appointmentRouter = createTRPCRouter({
       data: input
     })
     return appointment
+  }),
+  getAppointments: protectedProcedure.input(z.number()).query(async ({ ctx, input }) => {
+    const appointments = await ctx.prisma.appointment.findMany({
+      where: {
+        clientId: input, 
+      },
+      include: {
+        client: true,
+        abonement: true,
+        trainer: true
+      }
+    })
+    return appointments
+  }),
+  deleteAppointment: protectedProcedure.input(z.number()).mutation(async ({ ctx, input }) => {
+    const appointment = await ctx.prisma.appointment.delete({
+      where: {
+        id: input
+      }
+    })
+    return appointment
   })
 });
