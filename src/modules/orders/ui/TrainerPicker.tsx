@@ -14,7 +14,7 @@ export const TrainerPicker: FC<TrainerPickerProps> = ({ trainers, selectedTraine
       <div className="flex gap-10  flex-wrap">
         {trainers.map((trainer) => {
           return (
-            <div className={`flex flex-col items-center ${selectedTrainer?.id === trainer.id ? 'border-black' : 'border-black/10'}  hover:shadow-xl hover:cursor-pointer border hover:border hover:border-black py-5 px-2 transition-all rounded-[10px]`} key={trainer.id} onClick={() => setSelectedTrainer(trainer)}>
+            <div className={`flex flex-col items-center ${selectedTrainer?.id === trainer.id ? 'border-green-500' : 'border-black/10'}  hover:shadow-xl hover:cursor-pointer border hover:border hover:border-green-800 py-5 px-2 transition-all rounded-[10px]`} key={trainer.id} onClick={() => setSelectedTrainer(trainer)}>
               <div 
                 className="w-[150px] h-[150px] bg-cover bg-center rounded-[100%]  mb-5 "
                 style={{backgroundImage: `url(${trainer.trainerImage})`}}

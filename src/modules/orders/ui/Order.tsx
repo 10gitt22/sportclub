@@ -1,23 +1,53 @@
-import { type Abonement, type Trainer } from "@prisma/client";
+import { type Client, type Abonement, type Trainer } from "@prisma/client";
 import { useState, type FC, useEffect } from "react";
 import { TrainerPicker } from "./TrainerPicker";
 import { addDays, formatDate } from "@/utils/date-helpers";
 import { Button } from "@/ui/Button";
 import { DatePicker } from "./DatePicker";
+import { toast } from "react-hot-toast";
+import { api } from "@/utils/api";
+import { useRouter } from "next/router";
 
 type OrderProps = {
-  abonement: Abonement
+  profile: Client
+  abonement: Abonement 
   trainers: Trainer[]
 }
 
-export const Order: FC<OrderProps> = ({ abonement, trainers }) => {
+export const Order: FC<OrderProps> = ({ profile, abonement, trainers }) => {
+  const { push } = useRouter()
   const [selectedTrainer, setSelectedTrainer] = useState<Trainer | null>(null)
   const [startDate, setStartDate] = useState(formatDate(new Date()))
   const [endDate, setEndDate] = useState(addDays(startDate, abonement.duration))
+  const { mutate, isLoading: creatingAppointment } = api.appointment.createAppointment.useMutation({
+    onSuccess: () => {
+      toast.success("Запис створено успішно!")
+      void push('/profile')
+    },
+    onError: (e) => {
+      toast.error(e.message)
+    },
+  })
+
 
   useEffect(() => {
     setEndDate(addDays(startDate, abonement.duration))
   }, [startDate])
+
+  const handleSubmit = () => {
+    if (abonement.trainerIncluded && !selectedTrainer) {
+      toast.error('Оберіть тренера!')
+      return
+    }
+    const appointmentData = {
+      clientId: profile.id,
+      abonementId: abonement.id,
+      trainerId: selectedTrainer?.id || null,
+      startDate,
+      endDate
+    }
+    mutate(appointmentData)
+  }
 
   return (
     <div className="lg:w-[55%] m-auto">
@@ -31,13 +61,7 @@ export const Order: FC<OrderProps> = ({ abonement, trainers }) => {
         <DatePicker startDate={startDate}  setStartDate={setStartDate} abonementDuration={abonement.duration}/>
         <div className="flex items-center justify-between border-t-2 mt-5 border-black/10 py-10">
           <div className="flex items-center gap-5 text-p">до сплати: <span className="font-bold block text-4xl">{abonement.price} грн</span></div>
-          <Button onClick={() => {
-            console.log({
-              startDate,
-              endDate, 
-              selectedTrainer
-            });
-          }}>оплатити</Button>
+          <Button className="min-w-[150px]" onClick={handleSubmit} disabled={creatingAppointment}>{creatingAppointment ? '...' : 'оплатити'}</Button>
         </div> 
       </div>
     </div>

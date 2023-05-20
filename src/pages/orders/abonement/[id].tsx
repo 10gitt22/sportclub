@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
-import { type Dispatch, type FC, type SetStateAction, useEffect, useState, memo } from "react"
 import { type NextPage, type GetStaticPaths, type GetStaticPropsContext, type InferGetStaticPropsType } from "next"
 
 import { prisma } from "@/server/db"
@@ -9,8 +8,6 @@ import { Loader } from "@/components/Loader"
 
 import { api } from "@/utils/api"
 import PageLayout from "@/layouts/PageLayout"
-import { type Trainer } from "@prisma/client"
-import { Button } from "@/ui/Button"
 import { useRouter } from "next/router"
 import { toast } from "react-hot-toast"
 import { Order } from "@/modules/orders"
@@ -51,7 +48,7 @@ type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 const OrderAbonement: NextPage<PageProps> = ({ id }) => {
   const { push, asPath } = useRouter()
 
-  const profile = api.profile.getProfile.useQuery(undefined, {
+  const profileQuery = api.profile.getProfile.useQuery(undefined, {
     retry: false, 
     onError: (error) => {
       void push('/')
@@ -73,7 +70,7 @@ const OrderAbonement: NextPage<PageProps> = ({ id }) => {
   const abonementQuery = api.abonement.getById.useQuery({ id }, { refetchOnMount: false, refetchOnWindowFocus: false })
   const trainersQuery = api.trainer.getAll.useQuery(undefined, { refetchOnMount: false, refetchOnWindowFocus: false })
   
-  if (profile.status === 'error') {
+  if (profileQuery.status === 'error') {
     return (
       <div className="flex justify-center items-center h-screen w-full">
         <Loader />
@@ -100,13 +97,20 @@ const OrderAbonement: NextPage<PageProps> = ({ id }) => {
     )
   }
 
+  if (!profileQuery.data) {
+    return (
+      <></>
+    )
+  }
+
+  const { data: profile } = profileQuery
   const { data: abonement } = abonementQuery
   const { data: trainers } = trainersQuery
 
   return (
     <PageLayout>
       <div className="w-full h-[calc(100vh_-_80px)] px-10 pt-10 pb-20">
-        <Order abonement={abonement} trainers={trainers}/>
+        <Order profile={profile} abonement={abonement} trainers={trainers}/>
       </div>
     </PageLayout>
   )

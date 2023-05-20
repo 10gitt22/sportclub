@@ -25,7 +25,7 @@ model Client {
   profileImage String?       @db.LongText
   userId       String        @unique
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  appointments Appointment[]
+  appointments Appointment[] @relation("ClientAppointments")
 
   @@map("Clients")
 }
@@ -38,7 +38,7 @@ model Trainer {
   trainerDescription String
   trainerImage       String        @db.LongText
   days               String        @db.VarChar(30)
-  appointments       Appointment[]
+  appointments       Appointment[] @relation("TrainerAppointments")
 
   @@map("Trainers")
 }
@@ -51,20 +51,22 @@ model Abonement {
   sessionsCount        Int           @db.SmallInt
   price                Float
   trainerIncluded      Boolean
-  appointments         Appointment[]
+  appointments         Appointment[] @relation("AbonementAppointment")
 
   @@map("Abonements")
 }
 
 model Appointment {
-  id          Int  @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   clientId    Int
   abonementId Int
   trainerId   Int?
+  startDate   String @db.Char(10)
+  endDate     String @db.Char(10)
 
-  client    Client    @relation(fields: [clientId], references: [id])
-  abonement Abonement @relation(fields: [abonementId], references: [id])
-  trainer   Trainer?  @relation(fields: [trainerId], references: [id])
+  client    Client    @relation("ClientAppointments", fields: [clientId], references: [id],  onDelete: Cascade)
+  abonement Abonement @relation("AbonementAppointment", fields: [abonementId], references: [id], onDelete: Cascade)
+  trainer   Trainer?  @relation("TrainerAppointments", fields: [trainerId], references: [id], onDelete: Cascade)
 
   @@index([clientId])
   @@index([abonementId])

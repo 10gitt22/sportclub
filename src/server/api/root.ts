@@ -2,6 +2,7 @@ import { createTRPCRouter } from "@/server/api/trpc";
 import { trainerRouter } from "./routers/trainer";
 import { abonementRouter } from "./routers/abonement";
 import { profileRouter } from "./routers/profile";
+import { appointmentRouter } from "./routers/appointment";
 
 /**
  * This is the primary router for your server.
@@ -11,7 +12,8 @@ import { profileRouter } from "./routers/profile";
 export const appRouter = createTRPCRouter({
   trainer: trainerRouter,
   abonement: abonementRouter,
-  profile: profileRouter
+  profile: profileRouter,
+  appointment: appointmentRouter
 });
 
 // export type definition of API

@@ -71,7 +71,6 @@ export const Profile = ({ ...props }) => {
           <Link href={'/#abonements'} className="text-p block mt-10 underline">записатись {'->'}</Link>
         </div>
       </div>
-
       {
         editOpened && (
           <Modal closeModal={closeEditModal}>
@@ -80,7 +79,6 @@ export const Profile = ({ ...props }) => {
           </Modal>
         )
       }
-     
     </div>
   )
 }
