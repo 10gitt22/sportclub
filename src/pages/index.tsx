@@ -9,6 +9,8 @@ import PageLayout from "@/layouts/PageLayout";
 import { prisma } from "@/server/db";
 
 const IntroSection: FC = () => {
+  console.log('check');
+  
   return (
     <section id="intro" className="px-5 lg:px-10 pt-[80px]">
       <h1 className="text-h1 text-center mb-10">sportclub</h1>
